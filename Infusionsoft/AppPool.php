@@ -12,6 +12,11 @@ class Infusionsoft_AppPool{
      * @param string $appHostname
      * @return Infusionsoft_App
      */
+
+    public static function defaultAppHostname(){
+        return self::$apps['default']->getHostname();
+    }
+
     public static function getApp($appHostname = ''){
 		$appKey = strtolower($appHostname);
 		if($appKey == '') $appKey = 'default';				
@@ -34,7 +39,7 @@ class Infusionsoft_AppPool{
 		if($appKey == null){
 			$appKey = $app->getHostname();
 		}		
-		self::$apps[$appKey] = $app;
+		self::$apps[strtolower($appKey)] = $app;
         return $app;
 	}
 

@@ -11,5 +11,16 @@ class Infusionsoft_Job extends Infusionsoft_Generated_Job{
             self::addCustomField($name);
         }
 	}
+
+    public function save($app = null){
+        if($this->Id == ''){
+            $invoiceId = Infusionsoft_InvoiceService::createBlankOrder($this->ContactId, $this->JobNotes, $this->DateCreated);
+            $invoice = new Infusionsoft_Invoice($invoiceId);
+            $this->Id = $invoice->JobId;
+        }
+        $result = parent::save($app);
+
+        return $result;
+    }
 }
 
