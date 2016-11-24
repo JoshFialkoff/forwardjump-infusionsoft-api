@@ -24,11 +24,11 @@ function forwardjump_infusionsoft_sdk_display_admin_page(){
     echo '<h2>ForwardJump Infusionsoft SDK Settings</h2>';
 
     echo '<form method="POST" action="options.php">';
-    settings_fields( 'fj_infusionsoft_sdk_settings' );
+        settings_fields( 'fj_infusionsoft_sdk_settings' );
 
-    do_settings_sections( 'fj_infusionsoft_sdk_settings' );
+        do_settings_sections( 'fj_infusionsoft_sdk_settings' );
 
-    submit_button();
+        submit_button();
     echo '</form>';
 }
 
