@@ -9,12 +9,12 @@
  * @author    Tim Jensen <tim@forwardjump.com>
  * @license   GPL-2.0+
  *
- * Plugin Name:       ForwardJump Infusionsoft SDK
- * Plugin URI:        https://github.com/timothyjensen/forwardjump-infusionsoft-sdk
+ * Plugin Name:       ForwardJump Infusionsoft API
+ * Plugin URI:        https://github.com/timothyjensen/forwardjump-infusionsoft-api
  * Description:       Integrates WP with the Infusionsoft API using OAuth 2.0.  Configure settings from the "Settings" menu.
  * Author:            Tim Jensen
  * Author URI:        http://forwardjump.com
- * Text Domain:       fj-infusionsoft-sdk
+ * Text Domain:       fj-infusionsoft-api
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Version:           1.0.0
@@ -38,7 +38,7 @@ include_once plugin_dir_path( __FILE__ ) . 'includes/options.php';
  */
 function fj_infusionsoft_init() {
 	// Get the serialized token from the WP options table
-	$infusionsoft_token = get_option( 'fj_infusionsoft_sdk_token' );
+	$infusionsoft_token = get_option( 'fj_infusionsoft_api_token' );
 
 	// Return early if token is not set
 	if ( ! $infusionsoft_token ) {
@@ -46,8 +46,8 @@ function fj_infusionsoft_init() {
 	}
 
 	$infusionsoft = new \Infusionsoft\Infusionsoft( array(
-		'clientId'     => get_option( 'fj_infusionsoft_sdk_client_id' ),
-		'clientSecret' => get_option( 'fj_infusionsoft_sdk_client_secret' ),
+		'clientId'     => get_option( 'fj_infusionsoft_api_client_id' ),
+		'clientSecret' => get_option( 'fj_infusionsoft_api_client_secret' ),
 		'redirectUri'  => admin_url(),
 	) );
 
@@ -62,7 +62,7 @@ function fj_infusionsoft_init() {
 	$infusionsoft_token = serialize( $infusionsoft->getToken() );
 
 	// Store the serialized token in the WP options table
-	update_option( 'fj_infusionsoft_sdk_token', $infusionsoft_token );
+	update_option( 'fj_infusionsoft_api_token', $infusionsoft_token );
 
 	return $infusionsoft;
 }
@@ -79,8 +79,8 @@ function fj_exchange_infusionsoft_code_for_token() {
 	}
 
 	$infusionsoft = new \Infusionsoft\Infusionsoft( array(
-		'clientId'     => get_option( 'fj_infusionsoft_sdk_client_id' ),
-		'clientSecret' => get_option( 'fj_infusionsoft_sdk_client_secret' ),
+		'clientId'     => get_option( 'fj_infusionsoft_api_client_id' ),
+		'clientSecret' => get_option( 'fj_infusionsoft_api_client_secret' ),
 		'redirectUri'  => admin_url(),
 	) );
 
@@ -90,7 +90,7 @@ function fj_exchange_infusionsoft_code_for_token() {
 	$infusionsoft_token = serialize( $infusionsoft->getToken() );
 
 	// Store serialized token in the WP options table
-	update_option( 'fj_infusionsoft_sdk_token', $infusionsoft_token );
+	update_option( 'fj_infusionsoft_api_token', $infusionsoft_token );
 
 	if ( $infusionsoft_token ) {
 		add_action( 'admin_notices', 'fj_infusionsoft_token_success_admin_notice' );

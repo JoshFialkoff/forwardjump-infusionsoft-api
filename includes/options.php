@@ -3,26 +3,26 @@
  * Adds options page
  */
 
-add_action( 'admin_menu', 'forwardjump_infusionsoft_sdk_admin_menu' );
+add_action( 'admin_menu', 'forwardjump_infusionsoft_api_admin_menu' );
 /**
  * Add the settings page to the menu.
  */
-function forwardjump_infusionsoft_sdk_admin_menu() {
+function forwardjump_infusionsoft_api_admin_menu() {
     add_options_page(
-        'ForwardJump Infusionsoft SDK Settings',    // Page title
-        'FJ Infusionsoft SDK',             // Menu title
+        'ForwardJump Infusionsoft API Settings',    // Page title
+        'FJ Infusionsoft API',             // Menu title
         'install_plugins',              // Available to users with this capability
-        'forwardjump-infusionsoft-sdk-admin-menu',                       // Menu slug
-        'forwardjump_infusionsoft_sdk_display_admin_page'    // Function to call
+        'forwardjump-infusionsoft-api-admin-menu',                       // Menu slug
+        'forwardjump_infusionsoft_api_display_admin_page'    // Function to call
     );
 }
 
 /**
  * Display the settings form.
  */
-function forwardjump_infusionsoft_sdk_display_admin_page() {
+function forwardjump_infusionsoft_api_display_admin_page() {
 	?>
-	<h1>ForwardJump Infusionsoft SDK Settings</h1>
+	<h1>ForwardJump Infusionsoft API Settings</h1>
 		<p>This plugin is intended to assist developers with integrating their WordPress installation with the <a href="https://github.com/infusionsoft/infusionsoft-php" target="_blank">Infusionsoft SDK</a>.  This integration authenticates using OAuth 2.0.</p>
 		<ol>
 			<li>You must have an account with Infusionsoft and be able to sign into that account.</li>
@@ -35,9 +35,9 @@ function forwardjump_infusionsoft_sdk_display_admin_page() {
 	<?php
 
 	echo '<form method="POST" action="options.php">';
-        settings_fields( 'fj_infusionsoft_sdk_settings' );
+        settings_fields( 'fj_infusionsoft_api_settings' );
 
-        do_settings_sections( 'fj_infusionsoft_sdk_settings' );
+        do_settings_sections( 'fj_infusionsoft_api_settings' );
 
         submit_button();
     echo '</form>';
@@ -47,50 +47,50 @@ function forwardjump_infusionsoft_sdk_display_admin_page() {
 	fj_infusionsoft_example_usage();
 }
 
-add_action( 'admin_init', 'forwardjump_infusionsoft_sdk_admin_init' );
+add_action( 'admin_init', 'forwardjump_infusionsoft_api_admin_init' );
 /**
  * Define the fields used on the settings page.
  */
-function forwardjump_infusionsoft_sdk_admin_init() {
+function forwardjump_infusionsoft_api_admin_init() {
     add_settings_section(
-    	'fj_infusionsoft_sdk_settings',
+    	'fj_infusionsoft_api_settings',
         '',
         null,
-        'fj_infusionsoft_sdk_settings'
+        'fj_infusionsoft_api_settings'
     );
 
     add_settings_field(
-    	'fj_infusionsoft_sdk_client_id',
+    	'fj_infusionsoft_api_client_id',
         'Infusionsoft&reg; Client ID',
-        'fj_infusionsoft_sdk_client_id_field',
-        'fj_infusionsoft_sdk_settings',
-	    'fj_infusionsoft_sdk_settings'
+        'fj_infusionsoft_api_client_id_field',
+        'fj_infusionsoft_api_settings',
+	    'fj_infusionsoft_api_settings'
     );
 
     add_settings_field(
-    	'fj_infusionsoft_sdk_client_secret',
+    	'fj_infusionsoft_api_client_secret',
         'Infusionsoft&reg; Client Secret',
-        'fj_infusionsoft_sdk_client_secret_field',
-        'fj_infusionsoft_sdk_settings',
-	    'fj_infusionsoft_sdk_settings'
+        'fj_infusionsoft_api_client_secret_field',
+        'fj_infusionsoft_api_settings',
+	    'fj_infusionsoft_api_settings'
     );
 
-    register_setting( 'fj_infusionsoft_sdk_settings', 'fj_infusionsoft_sdk_client_id', 'infusionsoft_sdk_sanitize' );
-    register_setting( 'fj_infusionsoft_sdk_settings', 'fj_infusionsoft_sdk_client_secret', 'infusionsoft_sdk_sanitize' );
+    register_setting( 'fj_infusionsoft_api_settings', 'fj_infusionsoft_api_client_id', 'fj_infusionsoft_api_sanitize' );
+    register_setting( 'fj_infusionsoft_api_settings', 'fj_infusionsoft_api_client_secret', 'fj_infusionsoft_api_sanitize' );
 }
 
 /**
  * Display the Client ID field.
  */
-function fj_infusionsoft_sdk_client_id_field() {
-    echo '<input type="text" name="fj_infusionsoft_sdk_client_id" value="' . get_option( 'fj_infusionsoft_sdk_client_id' ) . '" size="30" /><br />';
+function fj_infusionsoft_api_client_id_field() {
+    echo '<input type="text" name="fj_infusionsoft_api_client_id" value="' . get_option( 'fj_infusionsoft_api_client_id' ) . '" size="30" /><br />';
 }
 
 /**
  * Display the Client Secret field.
  */
-function fj_infusionsoft_sdk_client_secret_field() {
-    echo '<input type="text" name="fj_infusionsoft_sdk_client_secret" value="' . get_option( 'fj_infusionsoft_sdk_client_secret' ) . '" size="15" /><br />';
+function fj_infusionsoft_api_client_secret_field() {
+    echo '<input type="text" name="fj_infusionsoft_api_client_secret" value="' . get_option( 'fj_infusionsoft_api_client_secret' ) . '" size="15" /><br />';
 }
 
 /**
@@ -100,8 +100,8 @@ function fj_infusionsoft_sdk_client_secret_field() {
  */
 function fj_infusionsoft_request_permission_link() {
     $infusionsoft = new \Infusionsoft\Infusionsoft( array(
-        'clientId'     => get_option( 'fj_infusionsoft_sdk_client_id' ),
-        'clientSecret' => get_option( 'fj_infusionsoft_sdk_client_secret' ),
+        'clientId'     => get_option( 'fj_infusionsoft_api_client_id' ),
+        'clientSecret' => get_option( 'fj_infusionsoft_api_client_secret' ),
         'redirectUri'  => admin_url()
     ) );
 
@@ -125,7 +125,7 @@ function fj_infusionsoft_example_usage() {
  * @param string $value
  * @return string
  */
-function infusionsoft_sdk_sanitize( $value ) {
+function fj_infusionsoft_api_sanitize( $value ) {
     return preg_replace( "/[^a-zA-Z0-9]+/", "", $value );
 }
 
