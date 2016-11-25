@@ -23,9 +23,9 @@ function forwardjump_infusionsoft_sdk_admin_menu() {
 function forwardjump_infusionsoft_sdk_display_admin_page() {
 	?>
 	<h1>ForwardJump Infusionsoft SDK Settings</h1>
-		<p>This plugin is intended for assist developers with integrating their WordPress installation with the <a href="https://github.com/infusionsoft/infusionsoft-php" target="_blank">Infusionsoft SDK</a>.  This integration authenticates using OAuth 2.0.</p>
+		<p>This plugin is intended to assist developers with integrating their WordPress installation with the <a href="https://github.com/infusionsoft/infusionsoft-php" target="_blank">Infusionsoft SDK</a>.  This integration authenticates using OAuth 2.0.</p>
 		<ol>
-			<li>You must have an account with Infusionsoft.</li>
+			<li>You must have an account with Infusionsoft and be able to sign into that account.</li>
 			<li>Register for a free <a href="https://keys.developer.infusionsoft.com/member/register" target="_blank">Infusionsoft developers account</a>.</li>
 			<li>Obtain the Client ID and Client Secret keys from your Infusionsoft developer's account, which are available at <a href="https://keys.developer.infusionsoft.com/apps/mykeys" target="_blank">https://keys.developer.infusionsoft.com/apps/mykeys</a>.</li>
 			<li>Paste the keys below and click "Save Changes".</li>
