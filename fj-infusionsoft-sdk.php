@@ -10,8 +10,8 @@
  * @license   GPL-2.0+
  *
  * Plugin Name:       ForwardJump Infusionsoft SDK
- * Plugin URI:        https://forwardjump.com
- * Description:       Integrates WP with the Infusionsoft API using OAuth 2.0.
+ * Plugin URI:        https://github.com/timothyjensen/forwardjump-infusionsoft-sdk
+ * Description:       Integrates WP with the Infusionsoft API using OAuth 2.0.  Configure settings from the "Settings" menu.
  * Author:            Tim Jensen
  * Author URI:        http://forwardjump.com
  * Text Domain:       fj-infusionsoft-sdk
