@@ -1,6 +1,6 @@
 # ForwardJump Infusionsoft API
 
-This plugin integrates WordPress with the Infusionsoft API using OAuth 2.0. This plugin is intended to assist developers with integrating their WordPress installation with the official [Infusionsoft SDK](https://github.com/infusionsoft/infusionsoft-php) using OAuth 2.0 authentication.
+This plugin is intended to assist developers with integrating their WordPress installation with the official [Infusionsoft SDK](https://github.com/infusionsoft/infusionsoft-php) using OAuth 2.0 authentication.
 The plugin includes the latest version of the officially supported Infusionsoft PHP SDK.
 
 ## Requirements
