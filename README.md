@@ -35,7 +35,18 @@ Check out the Codex for more information about [installing plugins manually](htt
 
 ## Usage
 
-Your API calls will be very similar to what is presented in the [Infusionsoft API documentation](https://developer.infusionsoft.com/docs/xml-rpc/ ).  See below for an example usage.
+Your API calls will be very similar to what is presented in the [Infusionsoft API documentation](https://developer.infusionsoft.com/docs/xml-rpc/ ).  The main difference is that a single line of code  `$infusionsoft = fj_infusionsoft_init();` replaces the following code found in the Infusionsoft documentation examples:
+```
+$infusionsoft = new \Infusionsoft\Infusionsoft(array(
+    'clientId' => CLIENT_ID,
+    'clientSecret' => CLIENT_SECRET,
+    'redirectUri' => REDIRECT_URL,
+));
+
+$infusionsoft->refreshAccessToken();
+```
+
+Example usage:
 
 ```php
 add_action( 'wp_login', 'fj_infusionsoft_api_sample_usage', 10, 2 );
