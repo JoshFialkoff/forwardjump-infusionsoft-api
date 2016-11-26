@@ -30,7 +30,7 @@ function forwardjump_infusionsoft_api_display_admin_page() {
 			<li>Obtain the Client ID and Client Secret keys from your Infusionsoft developer's account, which are available at <a href="https://keys.developer.infusionsoft.com/apps/mykeys" target="_blank">https://keys.developer.infusionsoft.com/apps/mykeys</a>.</li>
 			<li>Paste the keys below and click "Save Changes".</li>
 			<li>After saving the keys you must click "Click here to authorize" to obtain an access token from Infusionsoft.  If successful, you will be redirected back to the WordPress Dashboard and will see a message that says "Your Infusionsoft Token has been successfully added!".</li>
-			<li>Once you have received an Infusionsoft token you can begin making API calls.  Your API calls will be very similar to what is presented in the <a href="https://developer.infusionsoft.com/docs/xml-rpc/" target="_blank">Infusionsoft API documentation</a>.  An example usage is provided at the bottom of this page.</li>
+			<li>Once you have received an Infusionsoft token you can begin making API calls.  Your API calls will be very similar to what is presented in the <a href="https://developer.infusionsoft.com/docs/xml-rpc/" target="_blank">Infusionsoft API documentation</a>.  The main difference is that a single line of code (<code>$infusionsoft = fj_infusionsoft_init();</code>) takes care of instantiating the Infusionsoft class and ensuring there is a valid access token.  An example usage is provided at the bottom of this page.</li>
 		</ol>
 	<?php
 
