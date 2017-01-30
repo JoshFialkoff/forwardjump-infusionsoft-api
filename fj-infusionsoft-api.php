@@ -2,8 +2,8 @@
 /**
  * Integrates WP with the Infusionsoft API using OAuth 2.0.
  * This plugin includes the latest version of the officially supported Infusionsoft PHP SDK
- * @see https://github.com/infusionsoft/infusionsoft-php
- * @see https://developer.infusionsoft.com/docs/xml-rpc/
+ * @see       https://github.com/infusionsoft/infusionsoft-php
+ * @see       https://developer.infusionsoft.com/docs/xml-rpc/
  *
  * @package   FJ-Infusionsoft-SDK
  * @author    Tim Jensen <tim@forwardjump.com>
@@ -74,7 +74,7 @@ add_action( 'admin_init', 'fj_exchange_infusionsoft_code_for_token' );
  * @see https://developer.infusionsoft.com/docs/xml-rpc/#authentication-request-an-access-token
  */
 function fj_exchange_infusionsoft_code_for_token() {
-	if ( ! $_GET['code'] || ! preg_match( '/infusionsoft/i', $_GET['scope'] ) ) {
+	if ( ! isset( $_GET['code'] ) || ! preg_match( '/infusionsoft/i', $_GET['scope'] ) ) {
 		return;
 	}
 
