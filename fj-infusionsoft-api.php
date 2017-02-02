@@ -55,7 +55,19 @@ function fj_infusionsoft_init() {
 
 	// Refresh the token if it is set to expire in less than 3 hrs
 	if ( 10800 > unserialize( $infusionsoft_token )->endOfLife - time() ) {
-		$infusionsoft->refreshAccessToken();
+
+		try {
+
+			$infusionsoft->refreshAccessToken();
+
+			update_option( 'fj_infusionsoft_api_errors', array( 'refresh_access_token' => true ) );
+
+		}
+		catch ( \GuzzleHttp\Exception\RequestException $e ) {
+
+			update_option( 'fj_infusionsoft_api_errors', array( 'refresh_access_token' => false ) );
+
+		}
 	}
 
 	// Save the token for future requests
@@ -84,15 +96,47 @@ function fj_exchange_infusionsoft_code_for_token() {
 		'redirectUri'  => admin_url(),
 	) );
 
-	$infusionsoft->requestAccessToken( $_GET['code'] );
+	try {
+		$infusionsoft->requestAccessToken( $_GET['code'] );
 
-	// Save the serialized token to the current session for subsequent requests
-	$infusionsoft_token = serialize( $infusionsoft->getToken() );
+		// Save the serialized token to the current session for subsequent requests
+		$infusionsoft_token = serialize( $infusionsoft->getToken() );
 
-	// Store serialized token in the WP options table
-	update_option( 'fj_infusionsoft_api_token', $infusionsoft_token );
+		// Store serialized token in the WP options table
+		update_option( 'fj_infusionsoft_api_token', $infusionsoft_token );
 
-	if ( $infusionsoft_token ) {
-		add_action( 'admin_notices', 'fj_infusionsoft_token_success_admin_notice' );
+		update_option( 'fj_infusionsoft_api_errors', array( 'refresh_access_token' => true ) );
+
+		if ( $infusionsoft_token ) {
+			add_action( 'admin_notices', 'fj_infusionsoft_token_success_admin_notice' );
+		}
+	}
+	catch ( \GuzzleHttp\Exception\RequestException $e ) {
+
+		update_option( 'fj_infusionsoft_api_errors', array( 'refresh_access_token' => false ) );
+
 	}
 }
+
+/**
+ * Display error in Admin Notices
+ */
+add_action( 'admin_notices', function() {
+	$errors = get_option( 'fj_infusionsoft_api_errors' );
+
+	if ( false === $errors['request_access_token'] ) {
+		?>
+		<div class="notice notice-error is-dismissible">
+			<p>There was a problem <b>requesting</b> the Infusionsoft Access Token.</p>
+		</div>
+		<?php
+	}
+
+	if ( false === $errors['refresh_access_token'] ) {
+		?>
+		<div class="notice notice-error is-dismissible">
+			<p>There was a problem <b>refreshing</b> the Infusionsoft Access Token.</p>
+		</div>
+		<?php
+	}
+} );
