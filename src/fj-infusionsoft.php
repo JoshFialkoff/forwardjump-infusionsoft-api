@@ -98,7 +98,7 @@ function fj_exchange_infusionsoft_code_for_token() {
 add_action( 'admin_notices', function () {
 	$errors = get_error_messages();
 
-	if ( 'false' === $errors['request_access_token'] ) {
+	if ( isset( $errors['request_access_token'] ) && 'false' === $errors['request_access_token'] ) {
 		?>
         <div class="notice notice-error is-dismissible">
             <p><b>Infusionsoft Error: </b>There was a problem <b>requesting</b> the Infusionsoft Access Token.</p>
@@ -106,7 +106,7 @@ add_action( 'admin_notices', function () {
 		<?php
 	}
 
-	if ( 'false' === $errors['refresh_access_token'] ) {
+	if ( isset( $errors['refresh_access_token'] ) && 'false' === $errors['refresh_access_token'] ) {
 		?>
         <div class="notice notice-error is-dismissible">
             <p><b>Infusionsoft Error: </b>There was a problem <b>refreshing</b> the Infusionsoft Access Token.</p>
@@ -114,7 +114,7 @@ add_action( 'admin_notices', function () {
 		<?php
 	}
 
-	if ( 'false' === $errors['valid_access_token'] ) {
+	if ( isset( $errors['valid_access_token'] ) && 'false' === $errors['valid_access_token'] ) {
 		?>
         <div class="notice notice-error is-dismissible">
             <p><b>Infusionsoft Error: </b>It looks like you have an <b>invalid</b> Infusionsoft Access Token.</p>
