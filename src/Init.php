@@ -11,41 +11,34 @@
 
 namespace ForwardJump\Infusionsoft;
 
-class Init {
+class Init extends \Infusionsoft\Infusionsoft {
 
 	/**
 	 * @return mixed|void
 	 */
-	private function get_option() {
+	public static function get_access_token() {
 		return get_option( 'fj_infusionsoft_api_token' );
 	}
 
 	/**
 	 *
 	 */
-	protected function instantiate_infusionsoft_class() {
-		return new \Infusionsoft\Infusionsoft( array(
-			'clientId'     => $this->get_client_id(),
-			'clientSecret' => $this->get_client_secret(),
-			'redirectUri'  => admin_url(),
-		) );
-	}
-
-	/**
-	 *
-	 */
-	protected function get_client_id() {
+	public static function get_client_id() {
 		return get_option( 'fj_infusionsoft_api_client_id' );
 	}
 
 	/**
 	 *
 	 */
-	protected function get_client_secret() {
+	public static function get_client_secret() {
 		return get_option( 'fj_infusionsoft_api_client_secret' );
 	}
 
-	private function refresh_token( $infusionsoft, $infusionsoft_token ) {
+	/**
+	 * @param $infusionsoft
+	 * @param $infusionsoft_token
+	 */
+	public function refresh_token( $infusionsoft, $infusionsoft_token ) {
 
 		// Refresh the token if it is set to expire in less than 3 hrs
 		if ( 10800 < unserialize( $infusionsoft_token )->endOfLife - time() ) {
@@ -67,13 +60,17 @@ class Init {
 	 * Init constructor.
 	 */
 	public function __construct() {
-		$infusionsoft_token = $this->get_option();
+		$infusionsoft_token = $this->get_access_token();
 
 		if ( ! $infusionsoft_token ) {
 			return false;
 		}
 
-		$infusionsoft = $this->instantiate_infusionsoft_class();
+		$infusionsoft = new \Infusionsoft\Infusionsoft( array(
+			'clientId'     => $this->get_client_id(),
+			'clientSecret' => $this->get_client_secret(),
+			'redirectUri'  => admin_url(),
+		) );
 
 		$infusionsoft->setToken( unserialize( $infusionsoft_token ) );
 

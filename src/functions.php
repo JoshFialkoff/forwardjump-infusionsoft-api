@@ -31,7 +31,7 @@ function fj_exchange_infusionsoft_code_for_token() {
 		return;
 	}
 
-	new \ForwardJump\Infusionsoft\ExchangeToken( $_GET['code'] );
+
 }
 
 /**

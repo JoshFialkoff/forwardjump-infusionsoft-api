@@ -9,7 +9,7 @@
  * @author    Tim Jensen <tim@forwardjump.com>
  * @license   GPL-2.0+
  *
- * Plugin Name:       ForwardJump Infusionsoft API
+ * Plugin Name:       ForwardJump Infusionsoft API OOP
  * Plugin URI:        https://github.com/timothyjensen/forwardjump-infusionsoft-api
  * Description:       Integrates WP with the Infusionsoft API using OAuth 2.0.  Configure settings from the "Settings" menu.
  * Author:            Tim Jensen
@@ -33,9 +33,6 @@ include_once plugin_dir_path( __FILE__ ) . 'src/options.php';
 
 // FJ Infusionsoft class.
 require_once plugin_dir_path( __FILE__ ) . 'src/Init.php';
-
-// FJ Infusionsoft ExchangeToken class.
-require_once plugin_dir_path( __FILE__ ) . 'src/ExchangeToken.php';
 
 // FJ Infusionsoft functions.
 require_once plugin_dir_path( __FILE__ ) . 'src/functions.php';
