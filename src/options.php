@@ -1,6 +1,12 @@
 <?php
 /**
  * Adds options page
+ *
+ * @package     ForwardJump Infusionsoft API
+ * @since       1.0.0
+ * @author      Tim Jensen
+ * @link        https://www.timjensen.us
+ * @license     GNU General Public License 2.0+
  */
 
 add_action( 'admin_menu', 'forwardjump_infusionsoft_api_admin_menu' );
@@ -99,11 +105,7 @@ function fj_infusionsoft_api_client_secret_field() {
  * @see https://developer.infusionsoft.com/docs/xml-rpc/#authentication-request-permission
  */
 function fj_infusionsoft_request_permission_link() {
-    $infusionsoft = new \Infusionsoft\Infusionsoft( array(
-        'clientId'     => get_option( 'fj_infusionsoft_api_client_id' ),
-        'clientSecret' => get_option( 'fj_infusionsoft_api_client_secret' ),
-        'redirectUri'  => admin_url()
-    ) );
+    $infusionsoft = \ForwardJump\Infusionsoft\get_infusionsoft_object();
 
 	?>
 	<h3>Authorize with Infusionsoft</h3>
