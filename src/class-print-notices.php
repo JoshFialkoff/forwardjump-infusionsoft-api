@@ -69,7 +69,3 @@ class Print_Notices {
 		} );
 	}
 }
-
-add_action( 'admin_init', function () {
-	new Print_Notices();
-}, 15 );

@@ -1,4 +1,10 @@
 {
+    "autoload": {
+        "psr-4": {
+            "ForwardJump\\InfusionsoftAPI\\": "src/"
+        }
+    },
+
     "require": {
         "infusionsoft/php-sdk": "^1.2"
     }

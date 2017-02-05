@@ -67,7 +67,3 @@ class Exchange_Token extends Infusionsoft {
 		include FJ_INFUSIONSOFT_API_DIR . '/views/admin-notices-success.php';
 	}
 }
-
-add_action( 'admin_init', function () {
-	new Exchange_Token();
-}, 5 );

@@ -30,24 +30,22 @@ if ( ! defined( 'FJ_INFUSIONSOFT_API_DIR' ) ) {
 	define( 'FJ_INFUSIONSOFT_API_DIR', plugin_dir_path( __FILE__ ) );
 }
 
-$require = array(
-	'vendor/autoload',
-	'src/class-infusionsoft',
-	'src/class-response-handler',
-	'src/class-print-notices',
-	'src/class-infusionsoft-init',
-	'src/class-exchange-token',
-);
+// Composer autoload classes.
+if ( file_exists( FJ_INFUSIONSOFT_API_DIR . 'vendor/autoload.php' ) ) {
+	require_once FJ_INFUSIONSOFT_API_DIR . 'vendor/autoload.php';
+}
 
 $include = array(
 	'src/options',
 	'src/wrapper-functions',
 );
 
-foreach( $require as $file ) {
-	require_once FJ_INFUSIONSOFT_API_DIR . $file . '.php';
-}
-
 foreach( $include as $file ) {
 	include_once FJ_INFUSIONSOFT_API_DIR . $file . '.php';
 }
+
+add_action( 'admin_init', function () {
+	new \ForwardJump\InfusionsoftAPI\Exchange_Token();
+
+	new \ForwardJump\InfusionsoftAPI\Print_Notices();
+} );
