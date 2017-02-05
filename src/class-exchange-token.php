@@ -1,19 +1,22 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: timothyjensen
- * Date: 2/2/17
- * Time: 9:38 PM
+ * Exchange code for access token
+ *
+ * @package     ForwardJump Infusionsoft API
+ * @since       1.0.0
+ * @author      Tim Jensen
+ * @link        https://www.timjensen.us
+ * @license     GNU General Public License 2.0+
  */
 
-namespace ForwardJump\Infusionsoft;
+namespace ForwardJump\InfusionsoftAPI;
 
 /**
  * Class Exchange_Token
  *
- * @package ForwardJump\Infusionsoft
+ * @package ForwardJump\InfusionsoftAPI
  */
-class Exchange_Token extends \Infusionsoft\Infusionsoft {
+class Exchange_Token extends Infusionsoft {
 
 	/**
 	 * Init constructor.
@@ -25,10 +28,6 @@ class Exchange_Token extends \Infusionsoft\Infusionsoft {
 		}
 
 		parent::__construct();
-
-		$this->clientId     = esc_html( Init::get_client_id() );
-		$this->clientSecret = esc_html( Init::get_client_secret() );
-		$this->redirectUri  = esc_url( admin_url() );
 
 		$this->request_access_token( $_GET['code'] );
 
@@ -51,9 +50,7 @@ class Exchange_Token extends \Infusionsoft\Infusionsoft {
 
 			new Response_Handler( array( 'refresh_access_token' => 'true' ) );
 
-			if ( $infusionsoft_token ) {
-				add_action( 'admin_notices', array( $this, 'print_success_notice' ) );
-			}
+			add_action( 'admin_notices', array( $this, 'print_success_notice' ) );
 		}
 		catch ( \GuzzleHttp\Exception\RequestException $e ) {
 
@@ -73,4 +70,4 @@ class Exchange_Token extends \Infusionsoft\Infusionsoft {
 
 add_action( 'admin_init', function () {
 	new Exchange_Token();
-} );
+}, 5 );

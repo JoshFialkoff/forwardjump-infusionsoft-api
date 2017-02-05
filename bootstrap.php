@@ -17,7 +17,7 @@
  * Text Domain:       fj-infusionsoft-api
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Version:           1.1.1
+ * Version:           1.1.2
  */
 
 // If this file is called directly, abort.
@@ -32,6 +32,7 @@ if ( ! defined( 'FJ_INFUSIONSOFT_API_DIR' ) ) {
 
 $require = array(
 	'vendor/autoload',
+	'src/class-infusionsoft',
 	'src/class-response-handler',
 	'src/class-print-notices',
 	'src/class-infusionsoft-init',

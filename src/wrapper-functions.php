@@ -16,7 +16,7 @@
  */
 function fj_infusionsoft_init() {
 
-	return new \ForwardJump\Infusionsoft\Init;
+	return new \ForwardJump\InfusionsoftAPI\Infusionsoft_Init();
 
 }
 

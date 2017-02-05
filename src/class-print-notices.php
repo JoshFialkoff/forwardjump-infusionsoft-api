@@ -9,12 +9,12 @@
  * @license     GNU General Public License 2.0+
  */
 
-namespace ForwardJump\Infusionsoft;
+namespace ForwardJump\InfusionsoftAPI;
 
 /**
  * Class Print_Notices
  *
- * @package ForwardJump\Infusionsoft
+ * @package ForwardJump\InfusionsoftAPI
  */
 class Print_Notices {
 
@@ -72,4 +72,4 @@ class Print_Notices {
 
 add_action( 'admin_init', function () {
 	new Print_Notices();
-} );
+}, 15 );

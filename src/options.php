@@ -105,11 +105,7 @@ function fj_infusionsoft_api_client_secret_field() {
  * @see https://developer.infusionsoft.com/docs/xml-rpc/#authentication-request-permission
  */
 function fj_infusionsoft_request_permission_link() {
-    $infusionsoft = new \Infusionsoft\Infusionsoft( array(
-        'clientId'     => get_option( 'fj_infusionsoft_api_client_id' ),
-        'clientSecret' => get_option( 'fj_infusionsoft_api_client_secret' ),
-        'redirectUri'  => admin_url()
-    ) );
+    $infusionsoft = new \ForwardJump\InfusionsoftAPI\Infusionsoft();
 
 	?>
 	<h3>Authorize with Infusionsoft</h3>

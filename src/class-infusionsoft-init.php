@@ -1,6 +1,6 @@
 <?php
 /**
- * Infusionsoft init
+ * Infusionsoft Init
  *
  * @package     ForwardJump Infusionsoft API
  * @since       1.0.0
@@ -9,14 +9,14 @@
  * @license     GNU General Public License 2.0+
  */
 
-namespace ForwardJump\Infusionsoft;
+namespace ForwardJump\InfusionsoftAPI;
 
 /**
- * Class Init
+ * Infusionsoft Init
  *
- * @package ForwardJump\Infusionsoft
+ * @package ForwardJump\InfusionsoftAPI
  */
-class Init extends \Infusionsoft\Infusionsoft {
+class Infusionsoft_Init extends Infusionsoft {
 
 	/**
 	 * Init constructor.
@@ -24,11 +24,6 @@ class Init extends \Infusionsoft\Infusionsoft {
 	public function __construct() {
 
 		parent::__construct();
-
-		// Properties of the parent Infusionsoft Class
-		$this->clientId     = esc_html( self::get_client_id() );
-		$this->clientSecret = esc_html( self::get_client_secret() );
-		$this->redirectUri  = esc_url( admin_url() );
 
 		$infusionsoft_token = $this->get_access_token();
 
@@ -48,20 +43,6 @@ class Init extends \Infusionsoft\Infusionsoft {
 
 		}
 
-	}
-
-	/**
-	 * @return string  Client ID
-	 */
-	public static function get_client_id() {
-		return get_option( 'fj_infusionsoft_api_client_id' );
-	}
-
-	/**
-	 * @return string  Client Secret
-	 */
-	public static function get_client_secret() {
-		return get_option( 'fj_infusionsoft_api_client_secret' );
 	}
 
 	/**
