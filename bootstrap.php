@@ -30,18 +30,9 @@ if ( ! defined( 'FJ_INFUSIONSOFT_API_DIR' ) ) {
 	define( 'FJ_INFUSIONSOFT_API_DIR', plugin_dir_path( __FILE__ ) );
 }
 
-// Composer autoload classes.
+// Composer autoload.
 if ( file_exists( FJ_INFUSIONSOFT_API_DIR . 'vendor/autoload.php' ) ) {
 	require_once FJ_INFUSIONSOFT_API_DIR . 'vendor/autoload.php';
-}
-
-$include = array(
-	'src/options',
-	'src/wrapper-functions',
-);
-
-foreach( $include as $file ) {
-	include_once FJ_INFUSIONSOFT_API_DIR . $file . '.php';
 }
 
 add_action( 'admin_init', function () {

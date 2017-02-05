@@ -2,7 +2,11 @@
     "autoload": {
         "psr-4": {
             "ForwardJump\\InfusionsoftAPI\\": "src/"
-        }
+        },
+        "files": [
+            "src/options.php",
+            "src/wrapper-functions.php"
+        ]
     },
 
     "require": {

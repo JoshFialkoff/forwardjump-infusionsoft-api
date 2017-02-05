@@ -10,6 +10,8 @@ class ComposerStaticInit2ee9c774b529fd4c495cdf53173f2765
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
+        'cc07db740399133fb4f98621d08caec5' => __DIR__ . '/../..' . '/src/options.php',
+        '87aec7a0dc8d81ed004cdb9b66e5e23c' => __DIR__ . '/../..' . '/src/wrapper-functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
