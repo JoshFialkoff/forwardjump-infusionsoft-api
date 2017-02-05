@@ -9,7 +9,7 @@
  * @author    Tim Jensen <tim@forwardjump.com>
  * @license   GPL-2.0+
  *
- * Plugin Name:       ForwardJump Infusionsoft API OOP
+ * Plugin Name:       ForwardJump Infusionsoft API
  * Plugin URI:        https://github.com/timothyjensen/forwardjump-infusionsoft-api
  * Description:       Integrates WP with the Infusionsoft API using OAuth 2.0.  Configure settings from the "Settings" menu.
  * Author:            Tim Jensen
@@ -17,7 +17,7 @@
  * Text Domain:       fj-infusionsoft-api
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Version:           1.1.0
+ * Version:           1.1.1
  */
 
 // If this file is called directly, abort.
@@ -25,14 +25,28 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-// Loads the Infusionsoft SDK.
-require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
+// Remember plugin root folder.
+if ( ! defined( 'FJ_INFUSIONSOFT_API_DIR' ) ) {
+	define( 'FJ_INFUSIONSOFT_API_DIR', plugin_dir_path( __FILE__ ) );
+}
 
-// Plugin options page.
-include_once plugin_dir_path( __FILE__ ) . 'src/options.php';
+$require = array(
+	'vendor/autoload',
+	'src/class-response-handler',
+	'src/class-print-notices',
+	'src/class-infusionsoft-init',
+	'src/class-exchange-token',
+);
 
-// FJ Infusionsoft class.
-require_once plugin_dir_path( __FILE__ ) . 'src/Init.php';
+$include = array(
+	'src/options',
+	'src/wrapper-functions',
+);
 
-// FJ Infusionsoft functions.
-require_once plugin_dir_path( __FILE__ ) . 'src/functions.php';
+foreach( $require as $file ) {
+	require_once FJ_INFUSIONSOFT_API_DIR . $file . '.php';
+}
+
+foreach( $include as $file ) {
+	include_once FJ_INFUSIONSOFT_API_DIR . $file . '.php';
+}
