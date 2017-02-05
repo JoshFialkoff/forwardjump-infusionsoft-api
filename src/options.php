@@ -1,6 +1,12 @@
 <?php
 /**
  * Adds options page
+ *
+ * @package     ForwardJump Infusionsoft API
+ * @since       1.0.0
+ * @author      Tim Jensen
+ * @link        https://www.timjensen.us
+ * @license     GNU General Public License 2.0+
  */
 
 add_action( 'admin_menu', 'forwardjump_infusionsoft_api_admin_menu' );
