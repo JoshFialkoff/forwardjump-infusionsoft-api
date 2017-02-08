@@ -60,8 +60,8 @@ add_action( 'admin_init', 'forwardjump_infusionsoft_api_admin_init' );
 function forwardjump_infusionsoft_api_admin_init() {
     add_settings_section(
     	'fj_infusionsoft_api_settings',
-        '',
-        null,
+        'Heading',
+//        'forwardjump_infusionsoft_api_display_admin_page',
         'fj_infusionsoft_api_settings'
     );
 
@@ -69,34 +69,32 @@ function forwardjump_infusionsoft_api_admin_init() {
     	'fj_infusionsoft_api_client_id',
         'Infusionsoft&reg; Client ID',
         'fj_infusionsoft_api_client_id_field',
-        'fj_infusionsoft_api_settings',
-	    'fj_infusionsoft_api_settings'
+        'fj_infusionsoft_api_settings'
     );
 
     add_settings_field(
     	'fj_infusionsoft_api_client_secret',
         'Infusionsoft&reg; Client Secret',
         'fj_infusionsoft_api_client_secret_field',
-        'fj_infusionsoft_api_settings',
-	    'fj_infusionsoft_api_settings'
+        'fj_infusionsoft_api_settings'
     );
 
-    register_setting( 'fj_infusionsoft_api_settings', 'fj_infusionsoft_api_client_id', 'fj_infusionsoft_api_sanitize' );
-    register_setting( 'fj_infusionsoft_api_settings', 'fj_infusionsoft_api_client_secret', 'fj_infusionsoft_api_sanitize' );
+    register_setting( 'fj_infusionsoft_api_settings', 'fj_infusionsoft_api', 'fj_infusionsoft_api_sanitize' );
 }
 
 /**
  * Display the Client ID field.
  */
 function fj_infusionsoft_api_client_id_field() {
-    echo '<input type="text" name="fj_infusionsoft_api_client_id" value="' . get_option( 'fj_infusionsoft_api_client_id' ) . '" size="30" /><br />';
+    var_dump( get_option( 'fj_infusionsoft_api' ) );
+    echo '<input type="text" name="fj_infusionsoft_api[client_id]" value="' . get_option( 'fj_infusionsoft_api' ) . '" size="30" /><br />';
 }
 
 /**
  * Display the Client Secret field.
  */
 function fj_infusionsoft_api_client_secret_field() {
-    echo '<input type="text" name="fj_infusionsoft_api_client_secret" value="' . get_option( 'fj_infusionsoft_api_client_secret' ) . '" size="15" /><br />';
+    echo '<input type="text" name="fj_infusionsoft_api[client_secret]" value="' . get_option( 'fj_infusionsoft_api' ) . '" size="15" /><br />';
 }
 
 /**
