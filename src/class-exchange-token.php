@@ -40,15 +40,12 @@ class Exchange_Token extends Infusionsoft {
 	 */
 	protected function request_access_token( $code ) {
 		try {
-			$this->requestAccessToken( $code );
-
-			// Save the serialized token to the current session for subsequent requests
-			$infusionsoft_token = serialize( $this->getToken() );
+			$token = $this->requestAccessToken( $code );
 
 			// Store serialized token in the WP options table
-			update_option( 'fj_infusionsoft_api_token', $infusionsoft_token );
+			update_option( 'fj_infusionsoft_api_token', $token );
 
-			new Response_Handler( array( 'refresh_access_token' => 'true' ) );
+			new Response_Handler( array( 'request_access_token' => 'true' ) );
 
 			add_action( 'admin_notices', array( $this, 'print_success_notice' ) );
 		}

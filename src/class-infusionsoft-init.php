@@ -26,18 +26,12 @@ class Infusionsoft_Init extends Infusionsoft {
 		parent::__construct();
 
 		$infusionsoft_token = $this->get_access_token();
+		$unserialized_token = maybe_unserialize( $infusionsoft_token );
 
-		// Return early if token is not available.
-		if ( ! is_object( $infusionsoft_token ) ) {
-			new Response_Handler( array( 'valid_access_token' => false ) );
-
-			return;
-		}
-
-		$this->setToken( $infusionsoft_token );
+		$this->setToken( $unserialized_token );
 
 		// Refresh the token if it is set to expire within 3 hours.
-		if ( 10800 > ( $infusionsoft_token->endOfLife - time() ) ) {
+		if ( 10800 > ( $unserialized_token->endOfLife - time() ) || ! $this->getToken() ) {
 
 			$this->refresh_access_token();
 
@@ -46,7 +40,7 @@ class Infusionsoft_Init extends Infusionsoft {
 	}
 
 	/**
-	 * Expected to return an unserialized object.
+	 * Expected to return a serialized object.
 	 *
 	 * @return mixed|null
 	 */
@@ -60,7 +54,7 @@ class Infusionsoft_Init extends Infusionsoft {
 	protected function refresh_access_token() {
 		try {
 
-			$this->refreshAccessToken();
+			$refreshed_token = $this->refreshAccessToken();
 
 			new Response_Handler( array( 'refresh_access_token' => 'true' ) );
 
