@@ -12,7 +12,7 @@
 /**
  * Instantiates the Infusionsoft class and checks for a valid token
  *
- * @return obj $infusionsoft    Required for each API call
+ * @return object $infusionsoft    Required for each API call
  */
 function fj_infusionsoft_init() {
 
