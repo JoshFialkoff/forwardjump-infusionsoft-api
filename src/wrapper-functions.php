@@ -20,6 +20,12 @@ function fj_infusionsoft_init() {
 
 }
 
+function fj_update_error_messages( $message ) {
+
+	new \ForwardJump\InfusionsoftAPI\Response_Handler( $message );
+
+}
+
 
 
 
