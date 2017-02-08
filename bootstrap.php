@@ -11,6 +11,7 @@
  *
  * Plugin Name:       ForwardJump Infusionsoft API
  * GitHub Plugin URI: https://github.com/timothyjensen/forwardjump-infusionsoft-api
+ * GitHub Branch:     master
  * Description:       Integrates WP with the Infusionsoft API using OAuth 2.0.  Configure settings from the "Settings" menu.
  * Author:            Tim Jensen
  * Author URI:        http://forwardjump.com
