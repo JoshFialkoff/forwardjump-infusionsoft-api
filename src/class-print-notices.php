@@ -58,6 +58,10 @@ class Print_Notices {
 			$notices[] = '<b>Infusionsoft Error: </b>It looks like you have an <b>invalid</b> Infusionsoft Access Token.';
 		}
 
+		if ( isset( $this->admin_notices['error_message'] ) ) {
+			$notices[] = '<b>Infusionsoft Error: </b>' . $this->admin_notices['error_message'];
+		}
+
 		ob_start();
 		foreach ( $notices as $notice ) {
 			include FJ_INFUSIONSOFT_API_DIR . '/views/admin-notices-error.php';
