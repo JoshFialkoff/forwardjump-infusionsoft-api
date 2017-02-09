@@ -5,7 +5,7 @@
  * @see       https://github.com/infusionsoft/infusionsoft-php
  * @see       https://developer.infusionsoft.com/docs/xml-rpc/
  *
- * @package   FJ-Infusionsoft-SDK
+ * @package   ForwardJump-Infusionsoft-API
  * @author    Tim Jensen <tim@forwardjump.com>
  * @license   GPL-2.0+
  *
