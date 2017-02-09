@@ -19,8 +19,8 @@ class SampleTest extends WP_UnitTestCase {
 	}
 
 	function test_client_id() {
-		$client_id = get_option( 'fj_infusionsoft_client_id' );
-		$client_secret = get_option( 'fj_infusionsoft_client_secret' );
+		$client_id = get_option( 'fj_infusionsoft_api_client_id' );
+		$client_secret = get_option( 'fj_infusionsoft_api_client_secret' );
 
 		$this->assertTrue( is_string( $client_id ) );
 	}
