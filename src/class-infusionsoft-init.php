@@ -31,7 +31,8 @@ class Infusionsoft_Init extends Infusionsoft {
 		$this->setToken( $unserialized_token );
 
 		// Refresh the token if it is set to expire within 3 hours.
-		if ( 10800 > ( $unserialized_token->endOfLife - time() ) || ! $this->getToken() ) {
+		$time_to_expire = $unserialized_token->endOfLife - time();
+		if ( 10800 > $time_to_expire || ! $this->getToken() ) {
 
 			$this->refresh_access_token();
 
@@ -49,12 +50,29 @@ class Infusionsoft_Init extends Infusionsoft {
 	}
 
 	/**
+	 * Updates the access token in the options table
+	 * 
+	 * @param $token
+	 *
+	 * @return bool
+	 */
+	protected function update_access_token( $token ) {
+		if ( ! $token ) {
+			return false;
+		}
+
+		return update_option( 'fj_infusionsoft_api_token', $token );
+	}
+
+	/**
 	 * Refreshes the Infusionsoft access token
 	 */
 	protected function refresh_access_token() {
 		try {
 
 			$refreshed_token = $this->refreshAccessToken();
+
+			$this->update_access_token( $refreshed_token );
 
 			new Response_Handler( array( 'refresh_access_token' => 'true' ) );
 
