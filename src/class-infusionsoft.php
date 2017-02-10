@@ -23,25 +23,15 @@ class Infusionsoft extends \Infusionsoft\Infusionsoft {
 	 */
 	public function __construct() {
 
-		parent::__construct( array(
-			'clientId'     => $this->get_client_id(),
-			'clientSecret' => $this->get_client_secret(),
-			'redirectUri'  => admin_url()
-		) );
+		parent::__construct();
 
-	}
+		$fj_infusionsoft_api_settings = get_option( 'fj_infusionsoft_api_client_id' );
 
-	/**
-	 * @return string  Client ID
-	 */
-	protected function get_client_id() {
-		return get_option( 'fj_infusionsoft_api_client_id' );
-	}
+		$this->clientId = $fj_infusionsoft_api_settings['client_id'];
 
-	/**
-	 * @return string  Client Secret
-	 */
-	protected function get_client_secret() {
-		return get_option( 'fj_infusionsoft_api_client_secret' );
+		$this->clientSecret = $fj_infusionsoft_api_settings['client_secret'];
+
+		$this->redirectUri = admin_url();
+
 	}
 }

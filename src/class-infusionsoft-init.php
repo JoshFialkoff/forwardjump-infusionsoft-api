@@ -45,7 +45,7 @@ class Infusionsoft_Init extends Infusionsoft {
 	 *
 	 * @return mixed|null
 	 */
-	protected function get_access_token() {
+	public function get_access_token() {
 		return get_option( 'fj_infusionsoft_api_token' );
 	}
 
@@ -56,7 +56,7 @@ class Infusionsoft_Init extends Infusionsoft {
 	 *
 	 * @return bool
 	 */
-	protected function update_access_token( $token ) {
+	public function update_access_token( $token ) {
 		if ( ! $token ) {
 			return false;
 		}
