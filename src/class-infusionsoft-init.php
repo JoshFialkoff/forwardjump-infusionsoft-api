@@ -25,16 +25,11 @@ class Infusionsoft_Init extends Infusionsoft {
 
 		parent::__construct();
 
-		$infusionsoft_token = $this->get_access_token();
-		$unserialized_token = maybe_unserialize( $infusionsoft_token );
+		$this->setToken( $this->get_option_access_token() );
 
-		$this->setToken( $unserialized_token );
+		if ( ! $this->getToken() || $this->is_token_expiring_soon( $this->getToken() ) ) {
 
-		// Refresh the token if it is set to expire within 3 hours.
-		$time_to_expire = $unserialized_token->endOfLife - time();
-		if ( 10800 > $time_to_expire || ! $this->getToken() ) {
-
-			$this->refresh_access_token();
+			$this->try_refresh_access_token();
 
 		}
 
@@ -45,34 +40,45 @@ class Infusionsoft_Init extends Infusionsoft {
 	 *
 	 * @return mixed|null
 	 */
-	public function get_access_token() {
-		return get_option( 'fj_infusionsoft_api_token' );
+	public function get_option_access_token() {
+		return maybe_unserialize( get_option( 'fj_infusionsoft_api_token' ) );
+	}
+
+	/**
+	 *
+	 *
+	 * @param $unserialized_token
+	 *
+	 * @return bool
+	 */
+	public function is_token_expiring_soon( $unserialized_token ) {
+		return ( 10800 > ( $unserialized_token->endOfLife - time() ) );
 	}
 
 	/**
 	 * Updates the access token in the options table
 	 * 
-	 * @param $token
+	 * @param $refreshed_token
 	 *
 	 * @return bool
 	 */
-	public function update_access_token( $token ) {
-		if ( ! $token ) {
+	public function update_option_access_token( $refreshed_token ) {
+		if ( ! $refreshed_token ) {
 			return false;
 		}
 
-		return update_option( 'fj_infusionsoft_api_token', $token );
+		return update_option( 'fj_infusionsoft_api_token', $refreshed_token );
 	}
 
 	/**
 	 * Refreshes the Infusionsoft access token
 	 */
-	protected function refresh_access_token() {
+	protected function try_refresh_access_token() {
 		try {
 
 			$refreshed_token = $this->refreshAccessToken();
 
-			$this->update_access_token( $refreshed_token );
+			$this->update_option_access_token( $refreshed_token );
 
 			new Response_Handler( array( 'refresh_access_token' => 'true' ) );
 
