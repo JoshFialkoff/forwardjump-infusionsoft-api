@@ -18,8 +18,10 @@
  * Text Domain:       fj-infusionsoft-api
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Version:           1.2.5
+ * Version:           1.2.6
  */
+
+namespace ForwardJump\InfusionsoftAPI;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -35,6 +37,23 @@ if ( ! defined( 'FJ_INFUSIONSOFT_API_DIR' ) ) {
 if ( file_exists( FJ_INFUSIONSOFT_API_DIR . 'vendor/autoload.php' ) ) {
 	require_once FJ_INFUSIONSOFT_API_DIR . 'vendor/autoload.php';
 }
+
+function autoload() {
+	$files = array(
+		'class-infusionsoft',
+		'class-infusionsoft-init',
+		'class-exchange-token',
+		'class-print-notices',
+		'class-response-handler',
+		'options',
+		'wrapper-functions'
+	);
+
+	foreach( $files as $file ) {
+		include_once FJ_INFUSIONSOFT_API_DIR . 'src/' . $file . '.php';
+	}
+}
+autoload();
 
 add_action( 'admin_init', function () {
 	new \ForwardJump\InfusionsoftAPI\Exchange_Token();
