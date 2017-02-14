@@ -77,7 +77,6 @@ function forwardjump_infusionsoft_api_admin_init() {
  * Display the Client ID field.
  */
 function fj_infusionsoft_api_client_id_field() {
-    var_dump( get_option( 'fj_infusionsoft_api' ) );
 	echo '<input type="text" name="fj_infusionsoft_api[client_id]" value="' . get_option( 'fj_infusionsoft_api' )['client_id'] . '" size="30" /><br />';
 }
 
