@@ -46,19 +46,19 @@ class Print_Notices {
 
 		$notices = array();
 
-		if ( isset( $this->admin_notices['request_access_token'] ) && 'false' === $this->admin_notices['request_access_token'] ) {
+		if ( ! empty( $this->admin_notices['request_access_token'] ) && 'false' === $this->admin_notices['request_access_token'] ) {
 			$notices[] = 'Infusionsoft Error: </b>There was a problem <b>requesting</b> the Infusionsoft Access Token.';
 		}
 
-		if ( isset( $this->admin_notices['refresh_access_token'] ) && 'false' === $this->admin_notices['refresh_access_token'] ) {
+		if ( ! empty( $this->admin_notices['refresh_access_token'] ) && 'false' === $this->admin_notices['refresh_access_token'] ) {
 			$notices[] = '<b>Infusionsoft Error: </b>There was a problem <b>refreshing</b> the Infusionsoft Access Token.';
 		}
 
-		if ( isset( $this->admin_notices['valid_access_token'] ) && 'false' === $this->admin_notices['valid_access_token'] ) {
+		if ( ! empty( $this->admin_notices['valid_access_token'] ) && 'false' === $this->admin_notices['valid_access_token'] ) {
 			$notices[] = '<b>Infusionsoft Error: </b>It looks like you have an <b>invalid</b> Infusionsoft Access Token.';
 		}
 
-		if ( isset( $this->admin_notices['error_message'] ) ) {
+		if ( ! empty( $this->admin_notices['error_message'] ) ) {
 			$notices[] = '<b>Infusionsoft Error: </b>' . $this->admin_notices['error_message'];
 		}
 
