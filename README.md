@@ -3,6 +3,9 @@
 This plugin is intended to assist developers with integrating their WordPress installation with the official [Infusionsoft SDK](https://github.com/infusionsoft/infusionsoft-php) using OAuth 2.0 authentication.
 The plugin includes the latest version of the officially supported Infusionsoft PHP SDK.
 
+## Version Notes
+As of version 2.0 the REST class is loaded by default. You can still use the XML-RPC class by passing `xml` as an argument to the Infusionsoft method. 
+
 ## Requirements
 * The Infusionsoft API requires an SSL connection
 

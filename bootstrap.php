@@ -18,7 +18,7 @@
  * Text Domain:       fj-infusionsoft-api
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Version:           1.2.6
+ * Version:           2.0.0
  */
 
 namespace ForwardJump\InfusionsoftAPI;
@@ -54,6 +54,8 @@ function autoload() {
 	}
 }
 autoload();
+
+require_once __DIR__ . '/vendor/infusionsoft/php-sdk/src/Infusionsoft/Api/Rest/ContactService.php';
 
 add_action( 'admin_init', function () {
 	new \ForwardJump\InfusionsoftAPI\Exchange_Token();
