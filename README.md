@@ -4,7 +4,7 @@ This plugin is intended to assist developers with integrating their WordPress in
 The plugin includes the latest version of the officially supported Infusionsoft PHP SDK.
 
 ## Version Notes
-As of version 2.0 the REST class is loaded by default. You can still use the XML-RPC class by passing `xml` as an argument to the Infusionsoft method. 
+As of version 2.0 the REST class is loaded by default. You can still use the XML-RPC class by passing `'xml'` as an argument to the Infusionsoft method. 
 
 ## Requirements
 * The Infusionsoft API requires an SSL connection
@@ -39,7 +39,7 @@ Check out the Codex for more information about [installing plugins manually](htt
 ## Usage
 
 Your API calls will be very similar to what is presented in the [Infusionsoft API documentation](https://developer.infusionsoft.com/docs/xml-rpc/ ).  The main difference is that a single line of code  `$infusionsoft = fj_infusionsoft_init();` replaces the following code found in the Infusionsoft documentation examples:
-```
+```php
 $infusionsoft = new \Infusionsoft\Infusionsoft(array(
     'clientId' => CLIENT_ID,
     'clientSecret' => CLIENT_SECRET,
@@ -75,7 +75,7 @@ function fj_infusionsoft_api_sample_usage( $user_login, $user ) {
     );
 
     // Adds the WP user as an Infusionsoft contact if they are not already in Infusionsoft
-    $contact_id = $infusionsoft->contacts()->addWithDupCheck( $contact, 'Email' );
+    $contact_id = $infusionsoft->contacts('xml')->addWithDupCheck( $contact, 'Email' );
 }
 ```
 
