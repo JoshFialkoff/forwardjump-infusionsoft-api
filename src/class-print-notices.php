@@ -44,28 +44,14 @@ class Print_Notices {
 			return;
 		}
 
-		$notices = array();
-
-		if ( isset( $this->admin_notices['request_access_token'] ) && 'false' === $this->admin_notices['request_access_token'] ) {
-			$notices[] = 'Infusionsoft Error: </b>There was a problem <b>requesting</b> the Infusionsoft Access Token.';
-		}
-
-		if ( isset( $this->admin_notices['refresh_access_token'] ) && 'false' === $this->admin_notices['refresh_access_token'] ) {
-			$notices[] = '<b>Infusionsoft Error: </b>There was a problem <b>refreshing</b> the Infusionsoft Access Token.';
-		}
-
-		if ( isset( $this->admin_notices['valid_access_token'] ) && 'false' === $this->admin_notices['valid_access_token'] ) {
-			$notices[] = '<b>Infusionsoft Error: </b>It looks like you have an <b>invalid</b> Infusionsoft Access Token.';
-		}
-
-		if ( ! empty( $this->admin_notices['error_message'] ) ) {
-			$notices[] = '<b>Infusionsoft Error: </b>' . $this->admin_notices['error_message'];
-		}
+		$this->admin_notices = (array) $this->admin_notices;
 
 		ob_start();
-		foreach ( $notices as $notice ) {
-			include FJ_INFUSIONSOFT_API_DIR . '/views/admin-notices-error.php';
-		}
+
+		$notice = $this->admin_notices[0]['message'] ?: 'There was an error with communicating with infusionsoft';
+
+		include FJ_INFUSIONSOFT_API_DIR . '/views/admin-notices-error.php';
+
 		$html_string = ob_get_clean();
 
 		add_action( 'admin_notices', function () use ( $html_string ) {

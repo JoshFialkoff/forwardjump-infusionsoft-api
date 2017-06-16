@@ -45,13 +45,17 @@ class Exchange_Token extends Infusionsoft {
 			// Store serialized token in the WP options table
 			update_option( 'fj_infusionsoft_api_token', $token );
 
-			new Response_Handler( array( 'request_access_token' => 'true' ) );
-
 			add_action( 'admin_notices', array( $this, 'print_success_notice' ) );
 		}
 		catch ( \GuzzleHttp\Exception\RequestException $e ) {
 
-			new Response_Handler( array( 'request_access_token' => 'false' ) );
+			new Response_Handler( [
+					'message' => $e->getMessage(),
+					'code'    => $e->getCode(),
+					'file'    => $e->getFile(),
+					'line'    => $e->getLine(),
+				]
+			);
 
 		}
 	}

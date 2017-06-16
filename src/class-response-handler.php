@@ -30,7 +30,7 @@ class Response_Handler {
 	 */
 	public function __construct( $new_admin_notice = array() ) {
 
-	    $this->update_admin_notices( $new_admin_notice );
+		$this->update_admin_notices( $new_admin_notice );
 
 	}
 
@@ -40,16 +40,16 @@ class Response_Handler {
 	 * @param $new_admin_notice
 	 */
 	protected function update_admin_notices( $new_admin_notice ) {
-		$this->admin_notices = get_option( 'fj_infusionsoft_api_errors' );
+		$this->admin_notices = (array) get_option( 'fj_infusionsoft_api_errors' );
 
-		if ( ! is_array( $this->admin_notices ) ) {
-			$this->admin_notices = array();
-		}
+		$new_admin_notice              = (array) $new_admin_notice;
+		$new_admin_notice['timestamp'] = time();
 
-		if ( is_array( $new_admin_notice ) ) {
-			$this->admin_notices = array_merge( $this->admin_notices, $new_admin_notice );
+		array_unshift( $this->admin_notices, $new_admin_notice );
 
-			update_option( 'fj_infusionsoft_api_errors', $this->admin_notices );
-		}
-    }
+		// We want to save a maximum of 20 errors.
+		$this->admin_notices = array_slice( $this->admin_notices, 0, 20 );
+
+		update_option( 'fj_infusionsoft_api_errors', $this->admin_notices );
+	}
 }

@@ -40,6 +40,8 @@ function forwardjump_infusionsoft_api_display_admin_page() {
 	fj_infusionsoft_request_permission_link();
 
 	fj_infusionsoft_example_usage();
+
+	fj_infusionsoft_latest_notices();
 }
 
 add_action( 'admin_init', 'forwardjump_infusionsoft_api_admin_init' );
@@ -106,6 +108,28 @@ function fj_infusionsoft_example_usage() {
 	?>
     <h3>Example usage:</h3>
     <script src="https://gist.github.com/timothyjensen/0efadea1e7bd1e442c9c4035c5078d5a.js"></script>
+	<?php
+}
+
+/**
+ * Shows the latest error messages from Infusionsoft.
+ *
+ * @since 2.1.0
+ * @return void
+ */
+function fj_infusionsoft_latest_notices() {
+	$infusionsoft_errors = get_option( 'fj_infusionsoft_api_errors' );
+
+	if ( ! $infusionsoft_errors ) {
+		return;
+	}
+
+	?>
+
+	<h3>These are the latest error messages received from Infusionsoft:</h3>
+	<pre>
+		<?php var_export( $infusionsoft_errors); ?>
+	</pre>
 	<?php
 }
 
