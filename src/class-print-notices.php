@@ -40,6 +40,10 @@ class Print_Notices {
 	 */
 	protected function print_notices() {
 
+		if ( ! defined( 'WP_DEBUG' ) || false == WP_DEBUG ) {
+			return;
+		}
+
 		if ( ! $this->admin_notices ) {
 			return;
 		}
