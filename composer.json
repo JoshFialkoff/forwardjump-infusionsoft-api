@@ -1,5 +1,28 @@
 {
+    "name": "timothyjensen/forwardjump-infusionsoft-api",
+    "description": "This plugin integrates WP with the Infusionsoft API using OAuth 2.0.",
+    "keywords": [
+        "wordpress"
+    ],
+    "type": "wordpress-plugin",
+    "license": "GPL-3.0+",
+    "authors": [
+        {
+            "name": "Tim Jensen",
+            "homepage": "https://www.timjensen.us/",
+            "role": "Developer"
+        }
+    ],
     "require": {
+        "php": ">=5.4",
         "infusionsoft/php-sdk": "^1.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "ForwardJump\\InfusionsoftAPI\\": "src/"
+        },
+        "files": [
+            "src/wrapper-functions.php"
+        ]
     }
 }

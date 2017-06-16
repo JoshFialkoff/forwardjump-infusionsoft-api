@@ -18,7 +18,7 @@
  * Text Domain:       fj-infusionsoft-api
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Version:           2.0.0
+ * Version:           2.1.0
  */
 
 namespace ForwardJump\InfusionsoftAPI;
@@ -30,7 +30,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 // Remember plugin root folder.
 if ( ! defined( 'FJ_INFUSIONSOFT_API_DIR' ) ) {
-	define( 'FJ_INFUSIONSOFT_API_DIR', plugin_dir_path( __FILE__ ) );
+	define( 'FJ_INFUSIONSOFT_API_DIR', __DIR__ . '/' );
 }
 
 // Composer autoload.
@@ -38,24 +38,10 @@ if ( file_exists( FJ_INFUSIONSOFT_API_DIR . 'vendor/autoload.php' ) ) {
 	require_once FJ_INFUSIONSOFT_API_DIR . 'vendor/autoload.php';
 }
 
-function autoload() {
-	$files = array(
-		'class-infusionsoft',
-		'class-infusionsoft-init',
-		'class-exchange-token',
-		'class-print-notices',
-		'class-response-handler',
-		'options',
-		'wrapper-functions'
-	);
-
-	foreach( $files as $file ) {
-		include_once FJ_INFUSIONSOFT_API_DIR . 'src/' . $file . '.php';
-	}
+// Load the options page.
+if ( is_admin() ) {
+	include_once FJ_INFUSIONSOFT_API_DIR . 'src/options.php';
 }
-autoload();
-
-require_once __DIR__ . '/vendor/infusionsoft/php-sdk/src/Infusionsoft/Api/Rest/ContactService.php';
 
 add_action( 'admin_init', function () {
 	new \ForwardJump\InfusionsoftAPI\Exchange_Token();
